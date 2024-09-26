@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kdigital_test/src/character/view/bloc/character_bloc.dart';
@@ -54,7 +55,11 @@ class _CharacterListPageState extends State<CharacterListPage> {
                 } else {
                   final character = state.characters[index];
                   return ListTile(
-                    leading: Image.network(character.image),
+                    leading: CachedNetworkImage(
+                      imageUrl: character.image,
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
                     title: Text(character.name),
                     subtitle: Text(character.status),
                     onTap: () {

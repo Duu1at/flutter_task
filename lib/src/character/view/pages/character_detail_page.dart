@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kdigital_test/src/character/domain/entities/character.dart';
 
@@ -17,11 +18,12 @@ class CharacterDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Image.network(
-                character.image,
-                height: 200,
+              child: CachedNetworkImage(
                 width: 200,
-                fit: BoxFit.cover,
+                height: 200,
+                imageUrl: character.image,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             const SizedBox(height: 16.0),

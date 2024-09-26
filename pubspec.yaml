@@ -19,6 +19,7 @@ dependencies:
   json_annotation: ^4.4.0
   cupertino_icons: ^1.0.2
   either_dart: ^1.0.0
+  cached_network_image: ^3.0.0
 
 dev_dependencies:
   flutter_test:
