@@ -1,21 +1,24 @@
-import 'package:kdigital_test/src/di/main_di_module.dart';
-import 'package:kdigital_test/src/presentation/ui/character_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kdigital_test/src/character/view/bloc/character_bloc.dart';
+import 'package:kdigital_test/src/character/view/pages/character_list_page.dart';
+import 'package:kdigital_test/src/di.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    MainDIModule().configure(GetIt.I);
     return MaterialApp(
-      title: 'Test app',
-      home: CharactersScreen(),
+      debugShowCheckedModeBanner: false,
+      home: BlocProvider(
+        create: (_) => CharacterBloc(sl()),
+        child: CharacterListPage(),
+      ),
     );
   }
 }
